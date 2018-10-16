@@ -1,6 +1,8 @@
 package com.technocredits.orangeHRM.pages;
 
-public class LoginPage {
+import com.technocredits.orangeHRM.base.PredefinedMethods;
+
+public class LoginPage extends PredefinedMethods {
 
 	private static LoginPage loginPage;
 
@@ -16,6 +18,11 @@ public class LoginPage {
 
 	public void enterValueForLoginPage(String locator, String value) {
 
+		setText(locator, value);
+	}
+	
+	public void clickButtonLoginPage(String locator){
+		clickButton(locator);
 	}
 
 }
