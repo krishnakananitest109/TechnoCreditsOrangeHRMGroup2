@@ -1,21 +1,46 @@
 package com.technocredits.orangeHRM.pages;
 
-public class LoginPage {
+import java.io.IOException;
+import java.util.Properties;
 
-	private static LoginPage loginPage;
+import com.technocredits.orangeHRM.base.PredefinedMethods;
+import com.technocredits.orangeHRM.util.PropertyFileReader;
 
-	private LoginPage() {
+//Services for LoginPage
+public class LoginPage extends PredefinedMethods{
 
+	private static LoginPage loginPageInstance;
+	Properties reader;
+	
+	// Initialise the browser and property file in constructor
+	private LoginPage() throws IOException {
+		inintialisation();
+		PropertyFileReader propertyFileReader = new PropertyFileReader();
+		reader=propertyFileReader.propReader("LoginPageProperties");
+	}
+	
+	// create a singleton class
+	public static LoginPage getInstance() throws IOException
+	{
+		if (loginPageInstance== null)
+		{
+			loginPageInstance= new LoginPage();
+		}
+		
+		return loginPageInstance;
+	}
+	
+	//Get locator and its value, pass to SetData method
+	public void enterValueForLoginPage(String locator, String value) throws InterruptedException
+	{
+		setData(reader.getProperty(locator), value);
+	}
+	
+	//Get locator of button and pass to click method
+	public void clickButtonOnLoginPage(String locator)
+	{
+		click(reader.getProperty(locator));
 	}
 
-	public static LoginPage getInstance() {
-		if (loginPage == null)
-			loginPage = new LoginPage();
-		return loginPage;
-	}
-
-	public void enterValueForLoginPage(String locator, String value) {
-
-	}
 
 }
